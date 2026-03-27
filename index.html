@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Droyz – Descarga la app</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .card {
+      text-align: center;
+      max-width: 360px;
+      width: 100%;
+    }
+
+    .logo {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    p {
+      font-size: 14px;
+      color: #888;
+      margin-bottom: 32px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      color: #fff;
+      transition: opacity 0.2s;
+      margin-bottom: 12px;
+    }
+
+    .btn:hover { opacity: 0.85; }
+
+    .btn-android { background: #3ddc84; color: #000; }
+    .btn-ios     { background: #1c1c1e; border: 1px solid #333; }
+
+    .btn svg { width: 22px; height: 22px; flex-shrink: 0; }
+
+    #status {
+      font-size: 13px;
+      color: #555;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">🎮</div>
+    <h1>Droyz Companion</h1>
+    <p>Redirigiendo a tu tienda...</p>
+
+    <a class="btn btn-android" id="btn-android"
+       href="https://play.google.com/store/apps/details?id=com.droyztoys&hl=es">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.523 15.341L5.386 22.01a1 1 0 0 1-1.5-.866V2.856a1 1 0 0 1 1.5-.866l12.137 6.67 2.104 1.157a1 1 0 0 1 0 1.732l-2.104 1.156zM6.5 4.83v14.34L15.7 12 6.5 4.83z"/>
+      </svg>
+      Google Play (Android)
+    </a>
+
+    <a class="btn btn-ios" id="btn-ios"
+       href="https://apps.apple.com/es/app/droyz-companion/id6747601588">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+      </svg>
+      App Store (iOS)
+    </a>
+
+    <div id="status"></div>
+  </div>
+
+  <script>
+    var ua = navigator.userAgent || navigator.vendor || window.opera;
+
+    function isIOS() {
+      return /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+    }
+
+    function isAndroid() {
+      return /android/i.test(ua);
+    }
+
+    var statusEl = document.getElementById("status");
+
+    if (isIOS()) {
+      statusEl.textContent = "Detectado: iOS → abriendo App Store…";
+      setTimeout(function () {
+        window.location.href = "https://apps.apple.com/es/app/droyz-companion/id6747601588";
+      }, 800);
+    } else if (isAndroid()) {
+      statusEl.textContent = "Detectado: Android → abriendo Google Play…";
+      setTimeout(function () {
+        window.location.href = "https://play.google.com/store/apps/details?id=com.droyztoys&hl=es";
+      }, 800);
+    } else {
+      // Desktop o dispositivo desconocido: muestra ambos botones
+      statusEl.textContent = "Elige tu plataforma ↑";
+    }
+  </script>
+</body>
+</html>
